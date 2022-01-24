@@ -12,7 +12,6 @@ for (x=0;x<10;x++) {
             id: obj_id,
             isSnake: false,
             isApple: false,
-            isSnakeHead: false,
             pos_x: x,
             pos_y: y
         }
@@ -31,7 +30,6 @@ const sprawdz = () => {
         if (element.pos_x==snakeHead.pos_x && element.pos_y==snakeHead.pos_y) {
             if (!snakeArr.includes(element)){
                 snakeArr.push(element)
-                element.isSnakeHead=true;
             }
             element.isSnake=true;
             let snake = document.getElementById(element.id)
@@ -54,7 +52,6 @@ const sprawdz = () => {
         snakeArr.forEach(element => {
             if (element.isSnake && !(element.pos_x==snakeHead.pos_x && element.pos_y==snakeHead.pos_y)){
                 let snake = document.getElementById(element.id)
-                isSnakeHead=false;
                 snake.style.backgroundColor="lightgreen"
             }
             
@@ -63,7 +60,6 @@ const sprawdz = () => {
             snakeArr[0].isSnake=false;
             snakeArr.shift()
         }
-        
         
     })
 }
