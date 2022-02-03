@@ -3,6 +3,8 @@ let len = 5;
 let milis = 1000;
 let snake_trail = [];
 let map_size = 20;
+let max_score = len - 5;
+const container = document.querySelector(".container");
 for (x = 0; x < map_size; x++) {
   for (y = 0; y < map_size; y++) {
     let obj_id = x * map_size + y;
@@ -19,8 +21,12 @@ str = "";
 array.forEach((element) => {
   str += `<div class="obj" id="${element.id}"></div>`;
 });
-str += `<h1 class="rank">WYNIK: ${len - 5}</h1>`;
-document.body.innerHTML = str;
+str += `<div class="scorebar"><h1 class="rank">WYNIK: ${len - 5}</h1></br>`;
+str += `<h1 class="top_rank">NAJWYZSZY WYNIK: ${max_score}</h1></div>`;
+str += `<a href="https://github.com/Artuyees" class="name"
+>Artur Kucinski | 2022</a
+>`;
+container.innerHTML = str;
 px = py = 5;
 ax = ay = 5;
 xv = yv = 0;
@@ -63,6 +69,12 @@ function game() {
 
     if (px == element.pos_x && py == element.pos_y && element.isApple) {
       len++;
+      if (len - 5 > max_score) {
+        max_score = len - 5;
+        document.querySelector(
+          ".top_rank"
+        ).innerHTML = `NAJWYZSZY WYNIK: ${max_score}`;
+      }
       document.querySelector(".rank").innerHTML = `WYNIK: ${len - 5}`;
       element.isApple = false;
       setApple();
@@ -70,8 +82,8 @@ function game() {
   });
   for (var i = 0; i < snake_trail.length; i++) {
     if (snake_trail[i].x == px && snake_trail[i].y == py) {
-      document.querySelector(".rank").innerHTML = `WYNIK: ${len - 5}`;
       len = 5;
+      document.querySelector(".rank").innerHTML = `WYNIK: ${len - 5}`;
     }
   }
   snake_trail.push({ x: px, y: py });
