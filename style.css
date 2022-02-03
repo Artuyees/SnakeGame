@@ -11,3 +11,8 @@ body {
   text-align: center;
   padding: 0px 0px;
 }
+.rank {
+  font-family: arial;
+  white-space: nowrap;
+  width: 100px;
+}

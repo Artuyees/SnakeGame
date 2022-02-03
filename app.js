@@ -1,14 +1,13 @@
 let array = [];
 let len = 5;
 let milis = 1000;
-let trail = [];
+let snake_trail = [];
 let map_size = 20;
 for (x = 0; x < map_size; x++) {
   for (y = 0; y < map_size; y++) {
     let obj_id = x * map_size + y;
     let obj = {
       id: obj_id,
-      isSnake: false,
       isApple: false,
       pos_x: x,
       pos_y: y,
@@ -20,6 +19,7 @@ str = "";
 array.forEach((element) => {
   str += `<div class="obj" id="${element.id}"></div>`;
 });
+str += `<h1 class="rank">WYNIK: ${len - 5}</h1>`;
 document.body.innerHTML = str;
 px = py = 5;
 ax = ay = 5;
@@ -49,12 +49,12 @@ function game() {
 
   array.forEach((element) => {
     document.getElementById(element.id).style.backgroundColor = "cornsilk";
-    for (var i = 0; i < trail.length; i++) {
-      if (trail[i].x == element.pos_x && trail[i].y == element.pos_y) {
+    for (var i = 0; i < snake_trail.length; i++) {
+      if (
+        snake_trail[i].x == element.pos_x &&
+        snake_trail[i].y == element.pos_y
+      ) {
         document.getElementById(element.id).style.backgroundColor = "green";
-      }
-      if (trail[i].x == px && trail[i].y == px) {
-        len = 5;
       }
     }
     if (element.isApple) {
@@ -63,16 +63,21 @@ function game() {
 
     if (px == element.pos_x && py == element.pos_y && element.isApple) {
       len++;
+      document.querySelector(".rank").innerHTML = `WYNIK: ${len - 5}`;
       element.isApple = false;
       setApple();
     }
   });
-  setTimeout(() => {
-    trail.push({ x: px, y: py });
-    while (trail.length > len) {
-      trail.shift();
+  for (var i = 0; i < snake_trail.length; i++) {
+    if (snake_trail[i].x == px && snake_trail[i].y == py) {
+      document.querySelector(".rank").innerHTML = `WYNIK: ${len - 5}`;
+      len = 5;
     }
-  }, 1000 / 15);
+  }
+  snake_trail.push({ x: px, y: py });
+  while (snake_trail.length > len) {
+    snake_trail.shift();
+  }
 }
 function logKey() {
   switch (event.key) {
