@@ -1,7 +1,4 @@
 # SnakeGame
-Snake game made for fun.
-
-
-
-
-bunch of spaghetti code but kinda works.
+Snake game made in school for fun.
+Made with vanilla js.
+Simple but works. 
