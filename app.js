@@ -24,7 +24,7 @@ array.forEach((element) => {
 str += `<div class="scorebar"><h1 class="rank">WYNIK: ${len - 5}</h1></br>`;
 str += `<h1 class="top_rank">NAJWYZSZY WYNIK: ${max_score}</h1></div>`;
 str += `<a href="https://github.com/Artuyees" class="name"
->Artur Kucinski | 2022</a
+>Artuyees | 2022</a
 >`;
 container.innerHTML = str;
 px = py = 5;
